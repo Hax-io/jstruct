@@ -1,0 +1,6 @@
+site_name: jstruct
+
+theme: alabaster
+
+extra:
+  logo: logo.png
