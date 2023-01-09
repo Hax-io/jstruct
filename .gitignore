@@ -14,3 +14,4 @@ jstruct-test-*
 *.o
 *.obj
 *.lst
+libjstruct.a
