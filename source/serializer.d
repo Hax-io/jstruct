@@ -1,0 +1,2 @@
+module jstruct.serializer;
+
