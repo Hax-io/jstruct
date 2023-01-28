@@ -12,6 +12,6 @@ public final class SerializationError : JStructException
 {
 	this()
 	{
-		super("Errro serializing");
+		super("Error serializing");
 	}
 }
