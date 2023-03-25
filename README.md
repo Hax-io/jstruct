@@ -7,6 +7,8 @@ jstruct
 
 ----
 
+[![D](https://github.com/Hax-io/jstruct/actions/workflows/d.yml/badge.svg)](https://github.com/Hax-io/jstruct/actions/workflows/d.yml)
+
 ## Usage
 
 ### Serialization
