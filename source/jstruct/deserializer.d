@@ -203,6 +203,7 @@ unittest
 		public bool isMale;
 		public JSONValue obj;
 		public int[] list;
+		public bool[] list2;
 	}
 	
 	JSONValue json = parseJSON(`{
@@ -211,7 +212,8 @@ unittest
 "age": 23,
 "obj" : {"bruh":1},
 "isMale": true,
-"list": [1,2,3]
+"list": [1,2,3],
+"list2": [true, false]
 }
 `);
 
@@ -228,6 +230,7 @@ unittest
 	assert(person.isMale == true);
 	assert(person.obj["bruh"].integer() == 1);
 	assert(person.list == [1,2,3]);
+	assert(person.list2 == [true, false]);
 }
 
 unittest
