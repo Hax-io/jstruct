@@ -1,3 +1,6 @@
+/** 
+ * Deserialization utilities
+ */
 module jstruct.deserializer;
 
 import std.json;

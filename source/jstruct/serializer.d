@@ -1,3 +1,6 @@
+/**
+ * Serialization utilities
+ */
 module jstruct.serializer;
 
 import std.json;
