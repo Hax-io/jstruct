@@ -3,8 +3,15 @@ module jstruct.serializer;
 import std.json;
 import std.conv : to;
 import std.traits : FieldTypeTuple, FieldNameTuple;
-		import std.traits : isArray;
+import std.traits : isArray;
 
+/** 
+ * Serializes the provided record into JSON
+ *
+ * Params:
+ *   record = the record to serialize into
+ * Returns: A `JSONValue` containing the serialized record
+ */
 public JSONValue serializeRecord(RecordType)(RecordType record)
 {		
 	// Final JSON to submit

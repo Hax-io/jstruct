@@ -2,19 +2,18 @@ module jstruct.deserializer;
 
 import std.json;
 import jstruct.exceptions : SerializationError;
-
 import std.traits : FieldTypeTuple, FieldNameTuple;
 
 /** 
-	* Deserializes the provided JSON into a struct of type RecordType
-	*
-	* Params:
-	*   jsonIn = the JSON to deserialize
-	* Throws:
-	*   RemoteFieldMissing = if the field names in the provided RecordType
-	*   	      cannot be found within the prpvided JSONValue `jsonIn`.
-	* Returns: an instance of RecordType
-	*/
+ * Deserializes the provided JSON into a struct of type RecordType
+ *
+ * Params:
+ *   jsonIn = the JSON to deserialize
+ * Throws:
+ *   RemoteFieldMissing = if the field names in the provided RecordType
+ *   	      cannot be found within the prpvided JSONValue `jsonIn`.
+ * Returns: an instance of RecordType
+ */
 public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 {
 	RecordType record;
