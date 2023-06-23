@@ -151,7 +151,16 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					{
 						mixin("record."~structNames[cnt])~= jsonVal.boolean();
 					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), float))
+					{
+						mixin("record."~structNames[cnt])~= cast(float)jsonVal.floating();
+					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), double))
+					{
+						mixin("record."~structNames[cnt])~= cast(double)jsonVal.floating();
+					}
 					
+
 
 				}
 
