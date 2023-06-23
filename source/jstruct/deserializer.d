@@ -212,7 +212,7 @@ unittest
 	assert(person.age == 23);
 	assert(person.isMale == true);
 	assert(person.obj["bruh"].integer() == 1);
-	//TODO: list test case
+	assert(person.list == [1,2,3]);
 }
 
 unittest
