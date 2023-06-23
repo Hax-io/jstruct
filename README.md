@@ -135,5 +135,4 @@ import jstruct;
 
 There are some outstanding issues I want to be able to fix/have implemented, namely:
 
-- [ ] Support for array serialization/deserialization - see issue #1
 - [ ] Support for custom types serialization/deserialization (think `enums` for example) - see issue #2
