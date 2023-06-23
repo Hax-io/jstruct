@@ -42,39 +42,39 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 
 		try
 		{
-			static if(__traits(isSame, mixin(structTypes[cnt]), byte))
+			static if(__traits(isSame, structTypes[cnt], byte))
 			{
 				mixin("record."~structNames[cnt]) = cast(byte)jsonIn[structNames[cnt]].integer();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), ubyte))
+			else static if(__traits(isSame, structTypes[cnt], ubyte))
 			{
 				mixin("record."~structNames[cnt]) = cast(ubyte)jsonIn[structNames[cnt]].uinteger();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), short))
+			else static if(__traits(isSame, structTypes[cnt], short))
 			{
 				mixin("record."~structNames[cnt]) = cast(short)jsonIn[structNames[cnt]].integer();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), ushort))
+			else static if(__traits(isSame, structTypes[cnt], ushort))
 			{
 				mixin("record."~structNames[cnt]) = cast(ushort)jsonIn[structNames[cnt]].uinteger();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), int))
+			else static if(__traits(isSame, structTypes[cnt], int))
 			{
 				mixin("record."~structNames[cnt]) = cast(int)jsonIn[structNames[cnt]].integer();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), uint))
+			else static if(__traits(isSame, structTypes[cnt], uint))
 			{
 				mixin("record."~structNames[cnt]) = cast(uint)jsonIn[structNames[cnt]].uinteger();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), ulong))
+			else static if(__traits(isSame, structTypes[cnt], ulong))
 			{
 				mixin("record."~structNames[cnt]) = cast(ulong)jsonIn[structNames[cnt]].uinteger();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), long))
+			else static if(__traits(isSame, structTypes[cnt], long))
 			{
 				mixin("record."~structNames[cnt]) = cast(long)jsonIn[structNames[cnt]].integer();
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), string))
+			else static if(__traits(isSame, structTypes[cnt], string))
 			{
 				mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]].str();
 
@@ -83,7 +83,7 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					pragma(msg,"record."~structNames[cnt]);
 				}
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), JSONValue))
+			else static if(__traits(isSame, structTypes[cnt], JSONValue))
 			{
 				mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]];
 
@@ -92,7 +92,7 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					pragma(msg,"record."~structNames[cnt]);
 				}
 			}
-			else static if(__traits(isSame, mixin(structTypes[cnt]), bool))
+			else static if(__traits(isSame, structTypes[cnt], bool))
 			{
 				mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]].boolean();
 
@@ -101,16 +101,16 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					pragma(msg,"record."~structNames[cnt]);
 				}
 			}
-			//FIXME: Not sure how to get array support going, very new to meta programming
-			else static if(__traits(isSame, mixin(structTypes[cnt]), mixin(structTypes[cnt])[]))
-			{
-				mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]].boolean();
+			// //FIXME: Not sure how to get array support going, very new to meta programming
+			// else static if(__traits(isSame, structTypes[cnt], structTypes[cnt])[])
+			// {
+			// 	mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]].boolean();
 
-				debug(dbg)
-				{
-					pragma(msg,"record."~structNames[cnt]);
-				}
-			}
+			// 	debug(dbg)
+			// 	{
+			// 		pragma(msg,"record."~structNames[cnt]);
+			// 	}
+			// }
 			else
 			{
 				// throw new
