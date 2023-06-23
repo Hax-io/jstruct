@@ -7,7 +7,7 @@ jstruct
 
 ----
 
-[![D](https://github.com/Hax-io/jstruct/actions/workflows/d.yml/badge.svg)](https://github.com/Hax-io/jstruct/actions/workflows/d.yml)
+[![D](https://github.com/Hax-io/jstruct/actions/workflows/d.yml/badge.svg)](https://github.com/Hax-io/jstruct/actions/workflows/d.yml) ![DUB](https://img.shields.io/dub/v/jstruct?color=%23c10000ff%20&style=flat-square) ![DUB](https://img.shields.io/dub/dt/jstruct?style=flat-square) ![DUB](https://img.shields.io/dub/l/jstruct?style=flat-square)
 
 ## Usage
 
