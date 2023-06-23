@@ -2,7 +2,7 @@ module jstruct.deserializer;
 
 import std.json;
 import jstruct.exceptions : SerializationError;
-import std.traits : FieldTypeTuple, FieldNameTuple;
+import std.traits : FieldTypeTuple, FieldNameTuple, isArray;
 
 /** 
  * Deserializes the provided JSON into a struct of type RecordType
@@ -100,16 +100,63 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					pragma(msg,"record."~structNames[cnt]);
 				}
 			}
-			// //FIXME: Not sure how to get array support going, very new to meta programming
-			// else static if(__traits(isSame, structTypes[cnt], structTypes[cnt])[])
-			// {
-			// 	mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]].boolean();
+			//FIXME: Not sure how to get array support going, very new to meta programming
+			// FIXME: Add component type checking
+			else static if(isArray!(structTypes[cnt]))
+			{
+				import std.traits : ForeachType;
+				import std.conv : to;
 
-			// 	debug(dbg)
-			// 	{
-			// 		pragma(msg,"record."~structNames[cnt]);
-			// 	}
-			// }
+				alias recordArrayComponent = mixin("record."~structNames[cnt]);
+
+				JSONValue[] jsonArray = jsonIn[structNames[cnt]].array();
+
+				for(ulong i = 0; i < jsonArray.length; i++)
+				{
+					JSONValue jsonVal = jsonArray[i];
+
+					static if(__traits(isSame, ForeachType!(structTypes[cnt]), byte))
+					{
+						mixin("record."~structNames[cnt])~= cast(byte)jsonVal.integer();
+					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), ubyte))
+					{
+						mixin("record."~structNames[cnt])~= cast(ubyte)jsonVal.uinteger();
+					}
+					static if(__traits(isSame, ForeachType!(structTypes[cnt]), short))
+					{
+						mixin("record."~structNames[cnt])~= cast(short)jsonVal.integer();
+					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), ushort))
+					{
+						mixin("record."~structNames[cnt])~= cast(ushort)jsonVal.uinteger();
+					}
+					static if(__traits(isSame, ForeachType!(structTypes[cnt]), int))
+					{
+						mixin("record."~structNames[cnt])~= cast(int)jsonVal.integer();
+					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), uint))
+					{
+						mixin("record."~structNames[cnt])~= cast(uint)jsonVal.uinteger();
+					}
+					static if(__traits(isSame, ForeachType!(structTypes[cnt]), long))
+					{
+						mixin("record."~structNames[cnt])~= cast(long)jsonVal.integer();
+					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), ulong))
+					{
+						mixin("record."~structNames[cnt])~= cast(ulong)jsonVal.uinteger();
+					}
+				}
+
+
+				// mixin("record."~structNames[cnt]) = jsonIn[structNames[cnt]].array();
+
+				debug(dbg)
+				{
+					pragma(msg,"record."~structNames[cnt]);
+				}
+			}
 			else
 			{
 				// throw new
