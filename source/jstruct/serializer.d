@@ -90,6 +90,11 @@ private enum EnumType
 	DOG,
 	CAT
 }
+
+/**
+ * Example serialization of our struct
+ * `Person` to JSON
+ */
 unittest
 {
 	import std.algorithm.searching : canFind;

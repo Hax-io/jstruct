@@ -194,6 +194,10 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 	return record;
 }
 
+/**
+ * Example deserialization of JSON
+ * to our `Person` struct
+ */
 unittest
 {
 	import std.string : cmp;
@@ -242,6 +246,10 @@ unittest
 	assert(person.list4 == [1.5, 1.4]);
 }
 
+/**
+ * Another example deserialization of JSON
+ * to our `Person` struct
+ */
 unittest
 {
 	import std.string : cmp;
