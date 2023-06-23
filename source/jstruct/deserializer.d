@@ -147,6 +147,12 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					{
 						mixin("record."~structNames[cnt])~= cast(ulong)jsonVal.uinteger();
 					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), bool))
+					{
+						mixin("record."~structNames[cnt])~= jsonVal.boolean();
+					}
+					
+
 				}
 
 
