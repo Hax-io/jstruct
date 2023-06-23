@@ -204,6 +204,8 @@ unittest
 		public JSONValue obj;
 		public int[] list;
 		public bool[] list2;
+		public float[] list3;
+		public double[] list4;
 	}
 	
 	JSONValue json = parseJSON(`{
@@ -213,7 +215,9 @@ unittest
 "obj" : {"bruh":1},
 "isMale": true,
 "list": [1,2,3],
-"list2": [true, false]
+"list2": [true, false],
+"list3": [1.5, 1.4],
+"list4": [1.5, 1.4]
 }
 `);
 
@@ -231,6 +235,8 @@ unittest
 	assert(person.obj["bruh"].integer() == 1);
 	assert(person.list == [1,2,3]);
 	assert(person.list2 == [true, false]);
+	assert(person.list3 == [1.5F, 1.4F]);
+	assert(person.list4 == [1.5, 1.4]);
 }
 
 unittest
