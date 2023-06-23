@@ -3,6 +3,7 @@ module jstruct.serializer;
 import std.json;
 import std.conv : to;
 import std.traits : FieldTypeTuple, FieldNameTuple;
+		import std.traits : isArray;
 
 public JSONValue serializeRecord(RecordType)(RecordType record)
 {		
@@ -23,34 +24,41 @@ public JSONValue serializeRecord(RecordType)(RecordType record)
 			// pragma(msg, structValues[cnt]);
 		}
 
+		import std.traits : isArray;
 
-		static if(__traits(isSame, mixin(structTypes[cnt]), int))
+
+		static if(__traits(isSame, structTypes[cnt], int))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
 		}
-		else static if(__traits(isSame, mixin(structTypes[cnt]), uint))
+		else static if(__traits(isSame, structTypes[cnt], uint))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
 		}
-		else static if(__traits(isSame, mixin(structTypes[cnt]), ulong))
+		else static if(__traits(isSame, structTypes[cnt], ulong))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
 		}
-		else static if(__traits(isSame, mixin(structTypes[cnt]), long))
+		else static if(__traits(isSame, structTypes[cnt], long))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
 		}
-		else static if(__traits(isSame, mixin(structTypes[cnt]), string))
+		else static if(__traits(isSame, structTypes[cnt], string))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
 		}
-		else static if(__traits(isSame, mixin(structTypes[cnt]), JSONValue))
+		else static if(__traits(isSame, structTypes[cnt], JSONValue))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
 		}
-		else static if(__traits(isSame, mixin(structTypes[cnt]), bool))
+		else static if(__traits(isSame, structTypes[cnt], bool))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
+		}
+		else static if(isArray!(structTypes[cnt]))
+		{
+			builtJSON[structNames[cnt]] = structValues[cnt];
+			// pragma(msg, "WAIT", "d"~mixin(structTypes[cnt]));
 		}
 		else
 		{
@@ -101,6 +109,14 @@ unittest
 	assert(canFind(keys, "firstname") && cmp(serialized["firstname"].str(), "Tristan") == 0);
 	assert(canFind(keys, "lastname") && cmp(serialized["lastname"].str(), "Kildaire") == 0);
 	assert(canFind(keys, "age") && serialized["age"].integer() == 23);
+
+	assert(canFind(keys, "list"));
+	JSONValue[] elems = serialized["list"].array();
+	for(ulong i = 0; i < elems.length; i++)
+	{
+		string curElem = elems[i].str();
+		assert(curElem == p1.list[i]);
+	}
 
 	debug(dbg)
 	{
