@@ -162,6 +162,10 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					{
 						mixin("record."~structNames[cnt])~= cast(double)jsonVal.floating();
 					}
+					else static if(__traits(isSame, ForeachType!(structTypes[cnt]), string))
+					{
+						mixin("record."~structNames[cnt])~= jsonVal.str();
+					}
 					
 
 
@@ -187,6 +191,7 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 		}
 		catch(JSONException e)
 		{
+			// TOOD: Should be DEserialization error
 			throw new SerializationError();
 		}
 	}
@@ -213,6 +218,7 @@ unittest
 		public bool[] list2;
 		public float[] list3;
 		public double[] list4;
+		public string[] list5;
 	}
 	
 	JSONValue json = parseJSON(`{
@@ -224,7 +230,8 @@ unittest
 "list": [1,2,3],
 "list2": [true, false],
 "list3": [1.5, 1.4],
-"list4": [1.5, 1.4]
+"list4": [1.5, 1.4],
+"list5": ["baba", "booey"]
 }
 `);
 
@@ -244,6 +251,8 @@ unittest
 	assert(person.list2 == [true, false]);
 	assert(person.list3 == [1.5F, 1.4F]);
 	assert(person.list4 == [1.5, 1.4]);
+	assert(person.list5 == ["baba", "booey"]);
+
 }
 
 /**
