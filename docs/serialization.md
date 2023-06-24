@@ -45,6 +45,6 @@ This returns the following JSON:
     },
     "firstname": "Tristan",
     "lastname": "Kildaire",
-    "list": "[\"1\", \"2\", \"3\"]"
+    "list": ["1", "2", "3"]
 }
 ```

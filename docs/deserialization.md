@@ -10,6 +10,10 @@ struct Person
     public int age;
     public bool isMale;
     public JSONValue obj;
+    public int[] list;
+    public bool[] list2;
+    public float[] list3;
+    public double[] list4;
 }
 ```
 
@@ -22,6 +26,10 @@ Now, let's say we were given the following JSON:
     "age": 23,
     "obj" : {"bruh":1},
     "isMale": true,
+    "list": [1,2,3],
+    "list2": [true, false],
+    "list3": [1.5, 1.4],
+    "list4": [1.5, 1.4]
 }
 ```
 
@@ -35,7 +43,10 @@ JSONValue json = parseJSON(`{
 "age": 23,
 "obj" : {"bruh":1},
 "isMale": true,
-"list": [1,2,3]
+"list": [1,2,3],
+"list2": [true, false],
+"list3": [1.5, 1.4],
+"list4": [1.5, 1.4]
 }
 `);
 
@@ -52,5 +63,5 @@ writeln(person):
 Which will output:
 
 ```
-Person("Tristan", "Kildaire", 23, true, {"bruh":1})
+Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4])
 ```
