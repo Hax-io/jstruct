@@ -14,6 +14,7 @@ struct Person
     public bool[] list2;
     public float[] list3;
     public double[] list4;
+    public string[] list5;
 }
 ```
 
@@ -29,7 +30,8 @@ Now, let's say we were given the following JSON:
     "list": [1,2,3],
     "list2": [true, false],
     "list3": [1.5, 1.4],
-    "list4": [1.5, 1.4]
+    "list4": [1.5, 1.4],
+    "list5": ["baba", "booey"]
 }
 ```
 
@@ -46,7 +48,8 @@ JSONValue json = parseJSON(`{
 "list": [1,2,3],
 "list2": [true, false],
 "list3": [1.5, 1.4],
-"list4": [1.5, 1.4]
+"list4": [1.5, 1.4],
+"list5": ["baba", "booey"]
 }
 `);
 
@@ -63,5 +66,5 @@ writeln(person):
 Which will output:
 
 ```
-Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4])
+Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4], ["baba", "booey"])
 ```
