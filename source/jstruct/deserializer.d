@@ -179,6 +179,26 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					pragma(msg,"record."~structNames[cnt]);
 				}
 			}
+			else static if(is(structTypes[cnt] == enum))
+			{
+				string enumChoice = jsonIn[structNames[cnt]].str();
+
+				import std.traits: EnumMembers, fullyQualifiedName;
+
+				alias members = EnumMembers!(structTypes[cnt]);
+
+				import std.stdio;
+				static foreach(member; members)
+				{
+					writeln(member);
+					writeln(fullyQualifiedName!(member));
+					writeln(__traits(identifier, member));
+					if(__traits(identifier, member) == enumChoice)
+					{
+						mixin("record."~structNames[cnt]) = member;
+					}
+				}
+			}
 			else
 			{
 				// throw new
@@ -186,6 +206,10 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 				debug(dbg)
 				{
 					pragma(msg, "Unknown type for de-serialization");
+
+					pragma(msg, is(structTypes[cnt] == enum));
+
+
 				}
 			}
 		}
@@ -289,6 +313,45 @@ unittest
 	catch(DeserializationError)
 	{
 		assert(true);
+	}
+	
+}
+
+
+unittest
+{
+	enum EnumType
+	{
+		DOG,
+		CAT
+	}
+
+	struct Person
+	{
+		public string firstname, lastname;
+
+		
+		public EnumType animal;
+		
+	}
+	
+	JSONValue json = parseJSON(`{
+"firstname" : "Tristan",
+"lastname": "Kildaire",
+"animal" : "CAT"
+}
+`);
+
+	try
+	{
+		Person person = fromJSON!(Person)(json);
+		import std.stdio : writeln;
+		writeln(person);
+		assert(true);
+	}
+	catch(DeserializationError)
+	{
+		assert(false);
 	}
 	
 }

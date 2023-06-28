@@ -141,9 +141,3 @@ And then in your D program import as follows:
 ```d
 import jstruct;
 ```
-
-## Help wanted
-
-There are some outstanding issues I want to be able to fix/have implemented, namely:
-
-- [ ] Support for custom types serialization/deserialization (think `enums` for example) - see issue #2
