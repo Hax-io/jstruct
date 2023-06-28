@@ -15,6 +15,7 @@ struct Person
     public float[] list3;
     public double[] list4;
     public string[] list5;
+    public EnumType animal;
 }
 ```
 
@@ -31,7 +32,8 @@ Now, let's say we were given the following JSON:
     "list2": [true, false],
     "list3": [1.5, 1.4],
     "list4": [1.5, 1.4],
-    "list5": ["baba", "booey"]
+    "list5": ["baba", "booey"],
+    "animal": "CAT"
 }
 ```
 
@@ -49,7 +51,8 @@ JSONValue json = parseJSON(`{
 "list2": [true, false],
 "list3": [1.5, 1.4],
 "list4": [1.5, 1.4],
-"list5": ["baba", "booey"]
+"list5": ["baba", "booey"],
+"animal": "CAT"
 }
 `);
 
@@ -66,5 +69,5 @@ writeln(person):
 Which will output:
 
 ```
-Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4], ["baba", "booey"])
+Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4], ["baba", "booey"], CAT)
 ```
