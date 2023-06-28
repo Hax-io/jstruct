@@ -19,7 +19,7 @@ public abstract class JStructException : Exception
  */
 public final class SerializationError : JStructException
 {
-	protected this()
+	this()
 	{
 		super("Error serializing");
 	}
@@ -30,7 +30,7 @@ public final class SerializationError : JStructException
  */
 public final class DeserializationError : JStructException
 {
-	protected this()
+	this()
 	{
 		super("Error deserializing");
 	}
