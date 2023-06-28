@@ -22,6 +22,17 @@ struct Person
     public int age;
     public string[] list;
     public JSONValue extraJSON;
+    public EnumType eType;
+}
+```
+
+Our enum is defined as:
+
+```d
+private enum EnumType
+{
+	DOG,
+	CAT
 }
 ```
 
@@ -34,6 +45,7 @@ p1.lastname = "Kildaire";
 p1.age = 23;
 p1.list = ["1", "2", "3"];
 p1.extraJSON = parseJSON(`{"item":1, "items":[1,2,3]}`);
+p1.eType = EnumType.CAT;
 ```
 
 Now, we make a call to `serializeRecord` as follows:
@@ -47,6 +59,7 @@ This returns the following JSON:
 ```json
 {
     "age": 23,
+    "eType": "CAT",
     "extraJSON": {
         "item": 1,
         "items": [
@@ -57,7 +70,11 @@ This returns the following JSON:
     },
     "firstname": "Tristan",
     "lastname": "Kildaire",
-    "list": ["1", "2", "3"]
+    "list": [
+        "1",
+        "2",
+        "3"
+    ]
 }
 ```
 
@@ -76,6 +93,8 @@ struct Person
     public bool[] list2;
     public float[] list3;
     public double[] list4;
+    public string[] list5;
+    public EnumType animal;
 }
 ```
 
@@ -91,7 +110,9 @@ Now, let's say we were given the following JSON:
     "list": [1,2,3],
     "list2": [true, false],
     "list3": [1.5, 1.4],
-    "list4": [1.5, 1.4]
+    "list4": [1.5, 1.4],
+    "list5": ["baba", "booey"],
+    "animal": "CAT"
 }
 ```
 
@@ -108,7 +129,9 @@ JSONValue json = parseJSON(`{
 "list": [1,2,3],
 "list2": [true, false],
 "list3": [1.5, 1.4],
-"list4": [1.5, 1.4]
+"list4": [1.5, 1.4],
+"list5": ["baba", "booey"],
+"animal": "CAT"
 }
 `);
 
@@ -125,7 +148,7 @@ writeln(person):
 Which will output:
 
 ```
-Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4])
+Person("Tristan", "Kildaire", 23, true, {"bruh":1}, [1, 2, 3], [true, false], [1.5, 1.4], [1.5, 1.4], ["baba", "booey"], CAT)
 ```
 
 ## Installing
