@@ -4,7 +4,7 @@
 module jstruct.deserializer;
 
 import std.json;
-import jstruct.exceptions : SerializationError;
+import jstruct.exceptions : DeserializationError;
 import std.traits : FieldTypeTuple, FieldNameTuple, isArray;
 
 /** 
@@ -191,8 +191,7 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 		}
 		catch(JSONException e)
 		{
-			// TOOD: Should be DEserialization error
-			throw new SerializationError();
+			throw new DeserializationError();
 		}
 	}
 
@@ -287,7 +286,7 @@ unittest
 		Person person = fromJSON!(Person)(json);
 		assert(false);
 	}
-	catch(SerializationError)
+	catch(DeserializationError)
 	{
 		assert(true);
 	}

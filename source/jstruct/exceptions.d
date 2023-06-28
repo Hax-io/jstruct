@@ -15,3 +15,11 @@ public final class SerializationError : JStructException
 		super("Error serializing");
 	}
 }
+
+public final class DeserializationError : JStructException
+{
+	this()
+	{
+		super("Error deserializing");
+	}
+}
