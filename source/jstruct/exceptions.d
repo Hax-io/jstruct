@@ -1,5 +1,11 @@
+/**
+ * Exception types
+ */
 module jstruct.exceptions;
 
+/** 
+ * General exception type
+ */
 public abstract class JStructException : Exception
 {
     this(string msg)
@@ -8,6 +14,9 @@ public abstract class JStructException : Exception
     }
 }
 
+/** 
+ * Error on serialization
+ */
 public final class SerializationError : JStructException
 {
 	this()
@@ -16,6 +25,9 @@ public final class SerializationError : JStructException
 	}
 }
 
+/** 
+ * Error on deserialization
+ */
 public final class DeserializationError : JStructException
 {
 	this()

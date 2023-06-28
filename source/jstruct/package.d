@@ -13,4 +13,7 @@ public import jstruct.serializer;
  */
 public import jstruct.deserializer;
 
+/**
+ * Exception types
+ */
 public import jstruct.exceptions;
