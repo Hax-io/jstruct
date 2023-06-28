@@ -87,16 +87,19 @@ private enum EnumType
 	CAT
 }
 
+version(unittest)
+{
+	import std.algorithm.searching : canFind;
+	import std.string : cmp;
+	import std.stdio : writeln;
+}
+
 /**
  * Example serialization of our struct
  * `Person` to JSON
  */
 unittest
 {
-	import std.algorithm.searching : canFind;
-	import std.string : cmp;
-	import std.stdio : writeln;
-	
 	struct Person
 	{
 		public string firstname, lastname;

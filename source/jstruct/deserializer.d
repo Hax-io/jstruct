@@ -280,15 +280,18 @@ unittest
 
 }
 
+version(unittest)
+{
+	import std.string : cmp;
+	import std.stdio : writeln;
+}
+
 /**
  * Another example deserialization of JSON
  * to our `Person` struct
  */
 unittest
 {
-	import std.string : cmp;
-	import std.stdio : writeln;
-	
 	struct Person
 	{
 		public string firstname, lastname;
@@ -347,7 +350,6 @@ unittest
 	try
 	{
 		Person person = fromJSON!(Person)(json);
-		import std.stdio : writeln;
 		writeln(person);
 		assert(true);
 	}
