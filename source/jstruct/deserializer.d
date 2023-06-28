@@ -230,8 +230,11 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
  */
 unittest
 {
-	import std.string : cmp;
-	import std.stdio : writeln;
+	enum EnumType
+	{
+		DOG,
+		CAT
+	}
 	
 	struct Person
 	{
@@ -244,6 +247,7 @@ unittest
 		public float[] list3;
 		public double[] list4;
 		public string[] list5;
+		public EnumType animal;
 	}
 	
 	JSONValue json = parseJSON(`{
@@ -256,7 +260,8 @@ unittest
 "list2": [true, false],
 "list3": [1.5, 1.4],
 "list4": [1.5, 1.4],
-"list5": ["baba", "booey"]
+"list5": ["baba", "booey"],
+"animal": "CAT"
 }
 `);
 
@@ -264,7 +269,7 @@ unittest
 
 	debug(dbg)
 	{
-		writeln(person);	
+		writeln("Deserialized as: ", person);	
 	}
 
 	assert(cmp(person.firstname, "Tristan") == 0);
@@ -277,6 +282,7 @@ unittest
 	assert(person.list3 == [1.5F, 1.4F]);
 	assert(person.list4 == [1.5, 1.4]);
 	assert(person.list5 == ["baba", "booey"]);
+	assert(person.animal == EnumType.CAT);
 
 }
 
@@ -288,7 +294,10 @@ version(unittest)
 
 /**
  * Another example deserialization of JSON
- * to our `Person` struct
+ * to our `Person` struct but here there
+ * is a problem with deserialization as
+ * there is a missing field `isMale`
+ * in the provided JSON
  */
 unittest
 {
@@ -299,6 +308,7 @@ unittest
 		public bool isMale;
 		public JSONValue obj;
 		public int[] list;
+		
 	}
 	
 	JSONValue json = parseJSON(`{

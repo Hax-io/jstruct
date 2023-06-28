@@ -81,11 +81,7 @@ public JSONValue serializeRecord(RecordType)(RecordType record)
 }
 
 // Test serialization of a struct to JSON
-private enum EnumType
-{
-	DOG,
-	CAT
-}
+
 
 version(unittest)
 {
@@ -100,6 +96,12 @@ version(unittest)
  */
 unittest
 {
+	enum EnumType
+	{
+		DOG,
+		CAT
+	}
+
 	struct Person
 	{
 		public string firstname, lastname;
