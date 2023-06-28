@@ -5,7 +5,8 @@ module jstruct.deserializer;
 
 import std.json;
 import jstruct.exceptions : DeserializationError;
-import std.traits : FieldTypeTuple, FieldNameTuple, isArray;
+import std.traits : FieldTypeTuple, FieldNameTuple, isArray, ForeachType, EnumMembers, fullyQualifiedName;;
+import std.conv : to;
 
 /** 
  * Deserializes the provided JSON into a struct of type RecordType
@@ -103,13 +104,8 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 					pragma(msg,"record."~structNames[cnt]);
 				}
 			}
-			//FIXME: Not sure how to get array support going, very new to meta programming
-			// FIXME: Add component type checking
 			else static if(isArray!(structTypes[cnt]))
 			{
-				import std.traits : ForeachType;
-				import std.conv : to;
-
 				alias recordArrayComponent = mixin("record."~structNames[cnt]);
 
 				JSONValue[] jsonArray = jsonIn[structNames[cnt]].array();
@@ -183,16 +179,22 @@ public RecordType fromJSON(RecordType)(JSONValue jsonIn)
 			{
 				string enumChoice = jsonIn[structNames[cnt]].str();
 
-				import std.traits: EnumMembers, fullyQualifiedName;
-
 				alias members = EnumMembers!(structTypes[cnt]);
 
-				import std.stdio;
+				version(dbg)
+				{
+					import std.stdio : writeln;
+				}
+				
 				static foreach(member; members)
 				{
-					writeln(member);
-					writeln(fullyQualifiedName!(member));
-					writeln(__traits(identifier, member));
+					version(dbg)
+					{
+						writeln(member);
+						writeln(fullyQualifiedName!(member));
+						writeln(__traits(identifier, member));
+					}
+					
 					if(__traits(identifier, member) == enumChoice)
 					{
 						mixin("record."~structNames[cnt]) = member;
