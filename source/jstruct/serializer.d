@@ -34,9 +34,6 @@ public JSONValue serializeRecord(RecordType)(RecordType record)
 			// pragma(msg, structValues[cnt]);
 		}
 
-		import std.traits : isArray;
-
-
 		static if(__traits(isSame, structTypes[cnt], int))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
@@ -68,7 +65,6 @@ public JSONValue serializeRecord(RecordType)(RecordType record)
 		else static if(isArray!(structTypes[cnt]))
 		{
 			builtJSON[structNames[cnt]] = structValues[cnt];
-			// pragma(msg, "WAIT", "d"~mixin(structTypes[cnt]));
 		}
 		else
 		{
