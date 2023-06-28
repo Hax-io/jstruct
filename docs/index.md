@@ -7,7 +7,7 @@ jstruct
 
 ## API
 
-For full API documentation see [DUB API Spec](https://jstruct.dpldocs.info/1.0.4/).
+For full API documentation see [DUB API Spec](https://jstruct.dpldocs.info/1.0.3/).
 
 ## Installing
 
