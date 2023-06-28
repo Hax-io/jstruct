@@ -29,7 +29,7 @@ struct Person
 Our enum is defined as:
 
 ```d
-private enum EnumType
+enum EnumType
 {
 	DOG,
 	CAT
